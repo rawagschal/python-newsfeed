@@ -9,14 +9,11 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='super_secret_key'
     )
-
-    @app.route('/hello')
-    def hello():
-        return 'hello world'
     
     #register routes
     app.register_blueprint(home)
     app.register_blueprint(dashboard)
+    app.register_blueprint(api)
     init_db(app)
     #register templates w/ filters
     app.jinja_env.filters['format_url'] = filters.format_url
@@ -27,6 +24,6 @@ def create_app(test_config=None):
 
     
 
-from app.routes import home, dashboard
+from app.routes import home, dashboard, api
 
 
